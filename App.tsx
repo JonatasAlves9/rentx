@@ -1,13 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { useFonts, Inter_400Regular, Inter_500Medium } from '@expo-google-fonts/inter';
+import { Archivo_400Regular, Archivo_600SemiBold } from '@expo-google-fonts/archivo';
+
+import { Home } from './src/Screens/Home';
+import AppLoading from 'expo-app-loading';
+import { ThemeProvider } from 'styled-components/native';
+import theme from './src/styles/theme';
 
 export default function App() {
+	const [fontsLoaded] = useFonts({
+		Inter_400Regular,
+		Inter_500Medium,
+		Archivo_400Regular,
+		Archivo_600SemiBold
+	});
+
+	if (!fontsLoaded) {
+		return <AppLoading />;
+	}
+
 	return (
-		<View >
-			<Text>Open up App.js to start working on your app!</Text>
-			<StatusBar style="auto" />
-		</View>
+		<ThemeProvider theme={theme}>
+			<Home />
+		</ThemeProvider>
+
 	);
 }
 
